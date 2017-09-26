@@ -1,0 +1,9 @@
+@---@
+<p class="flow-text">In order to package software, the Panux packaging system uses a special package generator file format (.pkgen). The overall format of a .pkgen file is the YAML data format. A .pkgen contains the following sections:</p>
+<ul class="collection">
+    <li class="collection-item">packages (required) - the list of generated packages and their dependencies</li>
+    <li class="collection-item">version (required) - the version of the package</li>
+    <li class="collection-item">souces (optional) - the source files to download before packaging</li>
+    <li class="collection-item">builddependencies - the packages to install before packaging</li>
+    <li class="collection-item">script - a script to run to compile and package</li>
+</ul>

@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/js/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/materialize.min.js"></script>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+            .pgr {
+                background: purple; /* fallback */
+                background: -webkit-linear-gradient(white, purple); /* Safari */
+                background: -o-linear-gradient(white, purple); /* Opera */
+                background: -moz-linear-gradient(white, purple); /* Firefox */
+                background: linear-gradient(white, purple); /* Standard */
+            }
+            .ps {
+                background: purple;
+            }
+            #title {
+                color: black;
+            }
+            h1, h2, h3, h4, h5, h6, p {
+                color: white;
+            }
+            html, body, h1, h2, h3, h4, h5, h6, div {
+                padding: 0;
+                border: 0;
+                margin: 0;
+            }
+        </style>
+        <title>{{.Title}}</title>
+    </head>
+    <header>
+        <nav class="indigo accent-3" id="nav">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo">Project Panux</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="https://github.com/panux">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <body>
+        <div class="pgr" id="title">
+			<div class="row container">
+                <h1 font-family:"Verdana", class="header center-on-small-only", id="Title">{{.Title}}</h1>
+            </div>
+        </div>
+        <div class="ps" id="pg">
+            <div class="container">
+                <div class="card black" style="height: 100%;">
+                    {{.Page}}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
