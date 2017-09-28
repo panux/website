@@ -8,8 +8,7 @@
     <li class="collection-item">builddependencies (optional) - the packages to install before packaging</li>
     <li class="collection-item">data (optional) - user-provided data for use with templating</li>
 </ul>
-<p class="flow-text">Various parts of the package build file (most importantly the script and sources) are passed through Golang <a href="https://golang.org/pkg/text/template/">text/template</a> with the value set to the parsed YAML of the unprocessed .pkgen file. Here is an example:</p>
-<code>TODO: add example .pkgen</code>
+<p class="flow-text">Various parts of the package build file (most importantly the script and sources) are passed through Golang <a href="https://golang.org/pkg/text/template/">text/template</a> with the value set to the parsed YAML of the unprocessed .pkgen file.</p>
 <ul class="collapsible">
     <li>
         <div class="collapsible-header">Templating Commands</div>
@@ -35,12 +34,24 @@
         <div class="collapsible-header">Writing Scripts for Different Types of Packages</div>
         <div class="collapsible-body">
             <h3>Make-based</h3>
-            <p class="flow-text">For make-based packages, you should use $(MAKE) -C [dir] in order to build the package and then again with the install target.</p>
+            <p class="flow-text">For make-based packages, you should use $(MAKE) -C [dir] in order to build the package and then again with the install target. For the install step, you must use the DESTDIR variable to point to the out directory for the main package with an absolute path. To get an absolute path, you can prefix your path with $(shell pwd). $(pwd) will not work since the script is inside a Makefile</p>
+            <h3>Configure-Make-based</h3>
+            <p class="flow-text">For packages that use ./configure before make, use (cd dir &amp;&amp; ./configure), putting appropriate options after configure. Some packages may require you to specify the platform. The appropriate platform for configure is usually {{"{{confarch}}"}}-unknown-linux-musl</p>
+            <h3>CMake-based</h3>
+            <p class="flow-text">For CMake-based packages, cmake must be added as a build dependency (it is not pre-installed in the package builder). First, make a directory inside the source directory called build. Then run (cd dir/build &amp;&amp; cmake ..) to generate Makefiles. Then, complete the rest of the build the same way as a make-based build.</p>
         </div>
     </li>
     <li>
-        <div class="collapsible-header">Writing Scripts for Different Types of Packages</div>
+        <div class="collapsible-header">Splitting packages</div>
         <div class="collapsible-body">
+            <p class="flow-text">The following convention is used for dividing packages into sub-packages:</p>
+            <ul class="collection">
+                <li class="collection-item">[package]-bin: executable binaries (when the main purpose of the package is not commands/daemons)</li>
+                <li class="collection-item">[package]-headers: headers for the package (should depend on headers for packages it #includes)</li>
+                <li class="collection-item">[package]-man: man-pages for the package</li>
+                <li class="collection-item">[package]-info: documentation other than man-pages for the package</li>
+                <li class="collection-item">[package]-dev: empty package which depends on headers and any other subpackages required for compiling</li>
+            </ul>
         </div>
     </li>
 </ul>
