@@ -1,15 +1,15 @@
-<html>
+<html style="flex: 1 0 auto;">
     <head>
         <link rel="stylesheet" href="/js/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="/js/jquery.min.js"></script>
-        <script src="/js/materialize.min.js"></script>
+        <script src="/js/materialize.min.js" async></script>
         <style>
             body {
                 margin: 0;
                 min-height: 100vh;
             }
-            body {
+            #bleh {
                 display: flex;
                 flex-direction: column;
             }
@@ -37,28 +37,36 @@
         </style>
         <title>{{.Title}}</title>
     </head>
-    <header>
-        <nav class="indigo accent-3" id="nav">
-            <div class="nav-wrapper container">
-                <a href="#" class="brand-logo">Project Panux</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="https://github.com/panux">GitHub</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <body>
-        <div class="pgr" id="title">
-			<div class="row container">
-                <h1 font-family:"Verdana", class="header center-on-small-only", id="Title">{{.Title}}</h1>
+        <div id="bleh" style="padding: 0;border: 0;margin: 0;">
+            <header>
+                <nav class="indigo accent-3" id="nav">
+                    <div class="nav-wrapper container">
+                        <a href="#" class="brand-logo">Project Panux</a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="https://github.com/panux">GitHub</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <div class="pgr" id="title">
+    			<div class="row container">
+                    <h1 font-family:"Verdana", class="header center-on-small-only", id="Title">{{.Title}}</h1>
+                </div>
             </div>
-        </div>
-        <div class="ps" id="pg">
-            <div class="container">
-                <div class="card black" style="height: 100%;">
-                    {{.Page}}
+            <div class="ps" id="pg">
+                <div class="container col s12">
+                        <div class="card black full" height=100%>
+                            {{.Page}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <script>
+            (window.onresize = function() {
+                document.getElementById('pg').style.minHeight = window.innerHeight - document.getElementById('pg').offsetTop;
+            })();
+        </script>
     </body>
 </html>

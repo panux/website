@@ -3,7 +3,44 @@
 <ul class="collection">
     <li class="collection-item">packages (required) - the list of generated packages and their dependencies</li>
     <li class="collection-item">version (required) - the version of the package</li>
+    <li class="collection-item">script (required) - a script to run to compile and package</li>
     <li class="collection-item">souces (optional) - the source files to download before packaging</li>
-    <li class="collection-item">builddependencies - the packages to install before packaging</li>
-    <li class="collection-item">script - a script to run to compile and package</li>
+    <li class="collection-item">builddependencies (optional) - the packages to install before packaging</li>
+    <li class="collection-item">data (optional) - user-provided data for use with templating</li>
+</ul>
+<p class="flow-text">Various parts of the package build file (most importantly the script and sources) are passed through Golang <a href="https://golang.org/pkg/text/template/">text/template</a> with the value set to the parsed YAML of the unprocessed .pkgen file. Here is an example:</p>
+<code>TODO: add example .pkgen</code>
+<ul class="collapsible">
+    <li>
+        <div class="collapsible-header">Templating Commands</div>
+        <div class="collapsible-body">
+            <ul class="collection">
+                <li class="collection-item">pkmv [filepath] [srcpkg] [destpkg] - moves a file from one package-output to another, automatically creating necessary parent directoies</li>
+                <li class="collection-item">extract [name] [compression] - extracts a tar (src/[name]-[.Version].tar.[compression]) and renames the extracted directory to remove a trailing version (mv [name]-[.Version] [name])</li>
+                <li class="collection-item">mvman [name] - moves the man directory (/usr/share/man) in the package output to the [name]-man package.</li>
+                <li class="collection-item">mvhdr [name] - moves the header directory (/usr/include) in the package output to the [name]-headers package.</li>
+                <li class="collection-item">configure [dir] - runs ./configure in the specified directory using arguments in .Data.configure</li>
+                <li class="collection-item">confarch - returns the target architecture in a format usable with configure</li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">How It Works</div>
+        <div class="collapsible-body">
+            <p class="flow-text">First, the file is read and unmarshaled as YAML into a struct (RawPackageGenerator in code). Then, all templates are evaluated and the results are placed into a new struct (PackageGenerator in code). Next, a makefile is generated and executed which downloads all of the sources and creates the directory structure. Afterwards, another makefile is generated with targets to install all build dependencies, execute the user provided script, and tar all generated packages. The directory structure containing the sources and makefile is then stored into a tar file.</p>
+            <p class="flow-text">The tar is then extracted in the build environment. The makefile is then run with -j6, which seems to be the optimal number. The tars are then moved into the destination directory and the container terminates.</p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Writing Scripts for Different Types of Packages</div>
+        <div class="collapsible-body">
+            <h3>Make-based</h3>
+            <p class="flow-text">For make-based packages, you should use $(MAKE) -C [dir] in order to build the package and then again with the install target.</p>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">Writing Scripts for Different Types of Packages</div>
+        <div class="collapsible-body">
+        </div>
+    </li>
 </ul>

@@ -3,8 +3,11 @@ all: site
 out:
 	mkdir out
 
-assets:
+assets: out/js
 	$(MAKE) -C js
+
+out/js: out
+	ln -s $(shell pwd)/js out/js
 
 site: assets out
 	go run build.go
@@ -16,3 +19,8 @@ cleanout:
 	rm -rf out
 
 clean: cleanassets cleanout
+
+run:
+	$(MAKE) site
+	$(MAKE) out/js
+	(cd out && quickserve)
