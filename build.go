@@ -38,7 +38,8 @@ func main() {
 			if e {
 				e = pglst[i] == ps
 			}
-			if !e {
+			if !e && filepath.Ext(fn) == ".html" {
+				log.Printf("Delete %q\n", p)
 				err = os.Remove(p)
 				if err != nil {
 					panic(err)

@@ -3,13 +3,13 @@ all: site
 out:
 	mkdir out
 
-assets: out/js
+assets:
 	$(MAKE) -C js
 
-out/js: out
-	ln -s $(shell pwd)/js out/js
+out/js: out assets
+	if [ ! -e out/js ]; then ln -s $(shell pwd)/js out/js; fi
 
-site: assets out
+site: out/js
 	go run build.go
 
 cleanassets:
@@ -22,5 +22,6 @@ clean: cleanassets cleanout
 
 run:
 	$(MAKE) site
-	$(MAKE) out/js
 	(cd out && quickserve)
+
+srvupd: site
