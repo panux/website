@@ -15,14 +15,14 @@
                 flex-direction: column;
             }
             .pgr {
-                background: purple; /* fallback */
-                background: -webkit-linear-gradient(white, purple); /* Safari */
-                background: -o-linear-gradient(white, purple); /* Opera */
-                background: -moz-linear-gradient(white, purple); /* Firefox */
-                background: linear-gradient(white, purple); /* Standard */
+                background: #50245d; /* fallback */
+                background: -webkit-linear-gradient(white, #50245d); /* Safari */
+                background: -o-linear-gradient(white, #50245d); /* Opera */
+                background: -moz-linear-gradient(white, #50245d); /* Firefox */
+                background: linear-gradient(white, #50245d); /* Standard */
             }
             .ps {
-                background: purple;
+                background: #50245d;
             }
             #title {
                 color: black;
@@ -46,13 +46,16 @@
             code {
                 background-color: grey;
             }
+            .purp {
+                background-color: rgb(46, 0, 64) !important;
+            }
         </style>
         <title>{{.Title}}</title>
     </head>
     <body>
         <div id="bleh" style="padding: 0;border: 0;margin: 0;">
             <header>
-                <nav class="indigo accent-3" id="nav">
+                <nav class="purp" id="nav">
                     <div class="nav-wrapper container">
                         <a href="/" class="brand-logo"><img src="/js/Panux Logo.png" height=100%></img></a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -70,7 +73,6 @@
             </div>
             <div class="ps" id="pg">
                 <div class="container col s12">
-                        <div class="card black full" height=100%>
                             {{.Page}}
                         </div>
                     </div>
