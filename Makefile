@@ -1,5 +1,8 @@
 all: site
 
+godeps:
+	go get -u gopkg.in/yaml.v2
+
 out:
 	mkdir out
 
@@ -9,7 +12,7 @@ assets:
 out/js: out assets
 	if [ ! -e out/js ]; then ln -s $(shell pwd)/js out/js; fi
 
-site: out/js
+site: out/js godeps
 	go run build.go
 
 cleanassets:
