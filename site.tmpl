@@ -51,6 +51,37 @@
             .dropdown-content li>span {
                 color: #2e0040;
             }
+            .side-nav {
+                position: fixed;
+                width: 200px;
+                left: 0;
+                top: 0;
+                margin: 0;
+                -webkit-transform: translateX(-100%);
+                transform: translateX(-100%);
+                height: 100%;
+                height: calc(100% + 60px);
+                height: -moz-calc(100%);
+                padding-bottom: 60px;
+                background-color: #28122e;
+                z-index: 999;
+                overflow-y: auto;
+                will-change: transform;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-transform: translateX(-105%);
+                transform: translateX(-105%);
+            }           
+            .side-nav li>a {
+                color: rgba(255, 255, 255, 0.87);
+            }
+            .dropdown-content li>a {
+                color: #2e0040;
+            }
+            .side-nav li>a>i.material-icons {
+                color: rgba(255, 255, 255, 0.54);
+                margin: 0 0px 0 0;
+            }
         </style>
         <title>{{.Title}}</title>
     </head>
@@ -63,8 +94,15 @@
             </ul>
                 <nav class="purp" id="nav">
                     <div class="nav-wrapper container">
-                        <a href="/" class="brand-logo center"><img src="/js/Panux Logo.png" height=100%></img></a>
+                        <a href="/" class="brand-logo center hide-on-med-and-down"><img src="/js/Panux Logo.png" height=100%></img></a>
+                        <a href="/" class="right hide-on-med-and-up show-on-medium-and-down"><img src="/js/Panux Logo.png" height=100%></img></a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="/Home.html">Home</a></li>
+                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Development<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a href="/Community.html">Community</a></li>
+                        </ul>
+                        <ul class="side-nav" id="mobile-demo">
                             <li><a href="/Home.html">Home</a></li>
                             <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Development<i class="material-icons right">arrow_drop_down</i></a></li>
                             <li><a href="/Community.html">Community</a></li>
