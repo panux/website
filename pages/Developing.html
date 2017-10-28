@@ -1,7 +1,7 @@
 @---@
 <p class="flow-text">Before you start building packages, you will need to install Docker and Go (for Linux) on your system.</p>
 <p class="flow-text">You will need the pkgen tool, which can be installed with <code>go get <a href="https://github.com/panux/pkgen">github.com/panux/pkgen</a></code></p>
-<p class="flow-text">In addition, to build the Docker containers used to build packages, you will need to git clone <a href="https://github/panux/panux-builder">https://github/panux/panux-builder.git</a> and run the compile.sh script as root (or with Docker permission).</p>
+<p class="flow-text">In addition, to build the Docker containers used to build packages, you will need to git clone <a href="https://github.com/panux/panux-builder">https://github/panux/panux-builder.git</a> and run the compile.sh script as root (or with Docker permission).</p>
 <p class="flow-text">Next, git clone the packages-main repository (<a href="https://github.com/panux/packages-main">https://github.com/panux/packages-main.git</a>). Then, cd into it.</p>
 <p class="flow-text">To build a package, use make. The make target is the name of the package. For example, to build bash you would run: <code>make bash</code>. The resulting packages will be placed in a subdirectory called out/out (configurable via environment variable).</p>
 <p class="flow-text">To read about how to create new package generator files, read <a href="/Package Generator.html">Package Generator</a></p>
