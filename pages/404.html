@@ -1,2 +1,13 @@
 @---@
-<p class="flow-text">Oops! Looks like you got lost! <a href="/">Click here</a> to return to the homepage</p>
+<p class="flow-text">Oops! That page can't be found.  We'll redirect you to the <a href="/">home page</a> in <span id="t">5</span> seconds.</p>
+<script>
+  let t = document.getElementById("t");
+  setInterval(() => {
+    if(parseInt(t.innerHTML) > 0) {
+      t.innerHTML = parseInt(t.innerHTML) - 1;
+    }
+    else {
+      window.location.href="/";
+    }
+  }, 1000);
+</script>
